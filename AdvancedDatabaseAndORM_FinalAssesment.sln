@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33723.286
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdvancedDatabaseAndORM_FinalAssesment", "AdvancedDatabaseAndORM_FinalAssesment\AdvancedDatabaseAndORM_FinalAssesment.csproj", "{FDC3CA57-1785-4499-92D6-F96D843F86AF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FDC3CA57-1785-4499-92D6-F96D843F86AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDC3CA57-1785-4499-92D6-F96D843F86AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDC3CA57-1785-4499-92D6-F96D843F86AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDC3CA57-1785-4499-92D6-F96D843F86AF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BC9C4E4C-50CD-451C-9BEF-2D0ED0683832}
+	EndGlobalSection
+EndGlobal
