@@ -1,7 +1,15 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using AdvancedDatabaseAndORM_FinalAssesment.Data;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<AdvancedDatabaseAndORM_FinalAssesmentContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("AdvancedDatabaseAndORM_FinalAssesmentContext") ?? throw new InvalidOperationException("Connection string 'AdvancedDatabaseAndORM_FinalAssesmentContext' not found.")));
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews(options =>
+{
+    options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true;
+});
 
 var app = builder.Build();
 
@@ -23,5 +31,6 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
 
 app.Run();
