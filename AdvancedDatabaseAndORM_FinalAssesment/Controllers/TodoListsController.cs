@@ -151,6 +151,7 @@ namespace AdvancedDatabaseAndORM_FinalAssesment.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+
         private bool TodoListExists(int id)
         {
           return (_context.TodoList?.Any(e => e.Id == id)).GetValueOrDefault();

@@ -162,6 +162,30 @@ namespace AdvancedDatabaseAndORM_FinalAssesment.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public IActionResult CreateItem(int listId)
+        {
+            var todoList = _context.TodoList.Find(listId);
+            if (todoList == null)
+            {
+                return NotFound();
+            }
+
+            return View(new TodoItem { TodoListId = listId });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateItem(TodoItem todoItem)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(todoItem);
+                await _context.SaveChangesAsync();
+                return RedirectToAction("Details", new { id = todoItem.TodoListId });
+            }
+
+            return View(todoItem);
+        }
+
         private bool TodoItemExists(int id)
         {
           return (_context.TodoItem?.Any(e => e.Id == id)).GetValueOrDefault();
