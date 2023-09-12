@@ -24,12 +24,19 @@ namespace AdvancedDatabaseAndORM_FinalAssesment.Controllers
         {
             var items = await _context.TodoItem
                 .Include(t => t.TodoList)
-                .OrderByDescending(t => t.Priority)  // Order by Priority (High to Low)
-                .ThenByDescending(t => t.DateOfCreation)  // Then order by DateOfCreation (Newest to Oldest)
+                .OrderBy(t => t.Priority)  // Order by Priority 
+                .ThenByDescending(t => t.DateOfCreation)  // Then order by DateOfCreation 
                 .ToListAsync();
 
-            return View(items);
+            // Group the items by Priority 
+            var groupedItems = items.GroupBy(t => t.Priority)
+                .OrderBy(group => group.Key)  // Order Priority groups 
+                .SelectMany(group => group.OrderByDescending(t => t.DateOfCreation))  // Order items within each group by DateOfCreation 
+                .ToList();
+
+            return View(groupedItems);
         }
+
 
         // GET: TodoItems/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -62,11 +69,11 @@ namespace AdvancedDatabaseAndORM_FinalAssesment.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Title,DateOfCreation,Priority,Description,IsCompleted,TodoListId")] TodoItem todoItem)
-        {
+        { // [Bind] is used to specify which properties should be included during model binding.
             if (ModelState.IsValid)
             {
                 _context.Add(todoItem);
-                await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync(); // executing other code while waiting for the awaited operation to finish.
                 return RedirectToAction(nameof(Index));
             }
             ViewData["TodoListId"] = new SelectList(_context.TodoList, "Id", "Title", todoItem.TodoListId);
@@ -185,6 +192,9 @@ namespace AdvancedDatabaseAndORM_FinalAssesment.Controllers
 
             return View(todoItem);
         }
+
+
+        
 
         private bool TodoItemExists(int id)
         {

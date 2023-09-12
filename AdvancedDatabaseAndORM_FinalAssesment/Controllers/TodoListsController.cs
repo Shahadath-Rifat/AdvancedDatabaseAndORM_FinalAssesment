@@ -36,6 +36,7 @@ namespace AdvancedDatabaseAndORM_FinalAssesment.Controllers
             }
 
             var todoList = await _context.TodoList
+                .Include(t => t.TodoItems) // Include related TodoItems
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (todoList == null)
             {
